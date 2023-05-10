@@ -1,0 +1,115 @@
+{%extends 'base.htm'%} {%block content%}
+
+
+<div class="container">
+  <div class="row justify-content-center ">
+    <br>
+
+    <form method="POST" enctype="multipart/form-data" class="md:w-2/4 w-3/4rounded-lg overflow-hidden  p-10 ">
+      <h1 class="text-5xl font-extrabold text-medium py-2 text-gray-500">Register</h1>
+      <br>
+      {{form.hidden_tag()}}
+      <div>
+        <label class="block text-gray-200 font-bold text-left mb-1 md:mb-0 pr-2" for="inline-full-name">
+          Full Name
+        </label>
+      </div>
+      <div>
+        {{form.name(class="bg-purple-900 appearance-none font-medium  rounded w-full py-2 px-4 text-gray-100
+            leading-tight focus:outline-none focus:bg-purple-700 transition ease-in-out duration-500")}}
+      </div>
+      <div class="my-4">
+        <div class=" w-1/3">
+          <label class="block text-gray-200 font-bold text-left mb-1 md:mb-0 pr-2 tracking-wide" for="inline-full-name">
+            Email
+          </label>
+        </div>
+        <div>
+          {{form.email(class="bg-purple-900 appearance-none font-medium  rounded w-full py-2 px-4 text-gray-100
+          leading-tight focus:outline-none focus:bg-purple-700 transition ease-in-out duration-500")}}
+        </div>
+
+
+        <small id="emailHelp" class="text-gray-400 text-xs">We'll never share your email with anyone else.</small>
+        <br>
+        {%if form.email.errors%} {%for error in form.email.errors%}
+
+        <small class="text-red-500 text-xs ">{{error}}</small>
+        {%endfor%} {%endif%}
+      </div>
+
+      <div class="my-4">
+        <div class=" w-1/3">
+          <label class="block text-gray-200 font-bold text-left mb-1 md:mb-0 pr-2 tracking-wide" for="inline-full-name">
+            Username
+          </label>
+        </div>
+        <div>
+          {{form.username(class="bg-purple-900 appearance-none font-medium  rounded w-full py-2 px-4 text-gray-100
+          leading-tight focus:outline-none focus:bg-purple-700 transition ease-in-out duration-500")}}
+        </div>
+
+
+        <small id="emailHelp" class="text-gray-400 text-xs">It should be unique.</small>
+        <br>
+        {%if form.username.errors%} {%for error in form.username.errors%}
+        <small class="text-red-500 text-xs ">{{error}}</small>
+        {%endfor%} {%endif%}
+      </div>
+      <div class="my-4">
+        <div class=" w-1/3">
+          <label class="block text-gray-200 font-bold text-left mb-1 md:mb-0 pr-2 tracking-wide" for="inline-full-name">
+            Password
+          </label>
+        </div>
+        <div>
+          {{form.password(class="bg-purple-900 appearance-none font-medium  rounded w-full py-2 px-4 text-gray-100
+          leading-tight focus:outline-none focus:bg-purple-700 transition ease-in-out duration-500")}}
+        </div>
+
+        {%if form.password.errors%} {%for error in
+          form.password.errors%}
+        <small class="text-red-500 text-xs ">{{error}}</small>
+        {%endfor%} {%endif%}
+      </div>
+      <div class="my-4">
+        <div>
+          <label class="block text-gray-200 font-bold text-left mb-1 md:mb-0 pr-2 tracking-wide" for="inline-full-name">
+            Re-Enter password
+          </label>
+        </div>
+        <div>
+          {{form.pass_confirm(class="bg-purple-900 appearance-none font-medium  rounded w-full py-2 px-4 text-gray-100
+          leading-tight focus:outline-none focus:bg-purple-700 transition ease-in-out duration-500")}}
+        </div>
+
+
+        {%if form.pass_confirm.errors%} {%for error in form.pass_confirm.errors%}
+        <small class="text-red-500 text-xs ">{{error}}</small>
+        {%endfor%} {%endif%}
+      </div>
+      <label class="block text-gray-500 font-semibold text-left mb-1 md:mb-0 pr-2 tracking-wide" for="inline-full-name">
+        Profile Picture
+      </label>
+
+      <div class="img width100 bg-purple-900 appearance-none font-medium rounded w-full py-2 px-4 mb-4
+        text-gray-100 leading-tight focus:outline-none focus:bg-purple-700 transition ease-in-out duration-500 ">
+        <span>Nothing uploaded:</span>
+        <!-- <input type=file name=train class="trainUp" required> -->
+        {{form.picture(class="imgUp")}} {%if
+          form.picture.errors%} {%for error in form.picture.errors%}
+
+        <small class="text-danger">{{error}}</small>
+        {%endfor%} {%endif%}
+      </div>
+      <div>
+        {{form.submit(class =" bg-purple-900 py-3 appearance-none outline-none hover:bg-purple-800 transition ease-in-out duration-500 my-2 focus:shadow-outline focus:outline-none text-white  py-2 px-4 rounded")}}
+      </div>
+
+
+    </form>
+  </div>
+</div>
+</div>
+</div>
+{%endblock%}

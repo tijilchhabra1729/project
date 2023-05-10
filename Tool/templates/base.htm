@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {%block head%} {%endblock%}
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.7.6/tailwind.min.css'>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/main.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}">
+  <title>EzML</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script>
+
+    $(document).ready(function () {
+      $("a").on('click', function (event) {
+
+        if (this.hash !== "") {
+          event.preventDefault();
+
+          var hash = this.hash;
+
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top
+          }, 800, function () {
+            window.location.hash = hash;
+          });
+        }
+      });
+    });
+
+  </script>
+
+</head>
+
+<body class="font-medium ">
+  <nav class="nav flex flex-wrap items-center justify-between py-4 px-2 ">
+    <div class="flex flex-no-shrink items-center mr-6  text-gray-500">
+      <span class=" text-xl tracking-tight font-bold">EzML</span>
+    </div>
+
+    <input class="menu-btn hidden" type="checkbox" id="menu-btn">
+    <label class="menu-icon block cursor-pointer md:hidden px-2 py-4 relative select-none" for="menu-btn">
+      <span class="navicon bg-grey-darkest flex items-center relative"></span>
+    </label>
+
+    <ul class="menu border-b md:border-none flex justify-end list-reset m-0 w-full md:w-auto">
+      {%if current_user.is_authenticated%}
+
+      <li class="border-t md:border-none">
+        <a href="{{url_for('calculator')}}"
+          class="block md:inline-block px-3 py-3 no-underline text-gray-200 hover:text-purple-300 ">Generator</a>
+      </li>
+      <li class=" border-t md:border-none">
+        <a href="{{ url_for('account') }}"
+          class="block md:inline-block px-3 py-3 no-underline text-gray-200 hover:text-purple-300">Account</a>
+      </li>
+      <li class="border-t md:border-none">
+        <a href="{{ url_for('logout') }}"
+          class="block md:inline-block px-3 py-3 no-underline text-gray-200 hover:text-purple-300">Logout,
+          {{current_user.username}}</a>
+      </li>
+
+
+      {%else%}
+      <li class="border-t md:border-none">
+        <a href="/" class="block md:inline-block px-3 py-3 no-underline text-gray-200 hover:text-purple-300">Home</a>
+      </li>
+      <li class="border-t md:border-none">
+        <a href="#abt" class="block md:inline-block px-3 py-3 no-underline text-gray-200 hover:text-purple-300">About
+          the app</a>
+      </li>
+      <li class="border-t md:border-none">
+        <a href="#feat"
+          class="block md:inline-block px-3 py-3 no-underline text-gray-200 hover:text-purple-300">Features</a>
+      </li>
+      <li class="border-t md:border-none">
+        <a href="#pricing"
+          class="block md:inline-block px-3 py-3 no-underline text-gray-200 hover:text-purple-300">Pricing</a>
+      </li>
+      <li class="border-t md:border-none">
+        <a href="{{url_for('register')}}"
+          class="block md:inline-block px-3 py-3 no-underline text-gray-200 hover:text-purple-300">Register</a>
+      </li>
+      <li class="border-t md:border-none">
+        <a href="{{url_for('login')}}"
+          class="block md:inline-block px-3 py-3 no-underline text-gray-200 hover:text-purple-300">Login</a>
+      </li>
+      {%endif%}
+    </ul>
+
+  </nav>
+  {%block content%} {%endblock%}
+
+  <div>
+    <h6 class="relative mx-auto bottom-0 inset-x-0  text-center p-4 text-gray-600"> Made with <span
+        style="color:rgb(249, 16, 105);">♥</span>
+      by
+      team XINO
+    </h6>
+  </div>
+  <!-- Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum est eos, dicta architecto obcaecati quia, minus
+  temporibus molestias doloribus repellat iusto officia nihil, expedita illum cum distinctio adipisci amet sit.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut adipisci fugit enim dolore! Non quasi dolorem enim culpa
+  similique veritatis repellat quo eaque ratione corrupti, cumque dolor dolores saepe ducimus?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis optio eligendi perspiciatis est quod! Ullam
+  explicabo ipsum quaerat iste quibusdam cum sit quos error, commodi dolor eum voluptas expedita illo.
+  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum est eos, dicta architecto obcaecati quia, minus
+  temporibus molestias doloribus repellat iusto officia nihil, expedita illum cum distinctio adipisci amet sit.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut adipisci fugit enim dolore! Non quasi dolorem enim culpa
+  similique veritatis repellat quo eaque ratione corrupti, cumque dolor dolores saepe ducimus?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis optio eligendi perspiciatis est quod! Ullam
+  explicabo ipsum quaerat iste quibusdam cum sit quos error, commodi dolor eum voluptas expedita illo.Lorem, ipsum dolor
+  sit amet consectetur adipisicing elit. Ipsum est eos, dicta architecto obcaecati quia, minus
+  temporibus molestias doloribus repellat iusto officia nihil, expedita illum cum distinctio adipisci amet sit.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut adipisci fugit enim dolore! Non quasi dolorem enim culpa
+  similique veritatis repellat quo eaque ratione corrupti, cumque dolor dolores saepe ducimus?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis optio eligendi perspiciatis est quod! Ullam
+  explicabo ipsum quaerat iste quibusdam cum sit quos error, commodi dolor eum voluptas expedita illo.Lorem, ipsum dolor
+  sit amet consectetur adipisicing elit. Ipsum est eos, dicta architecto obcaecati quia, minus
+  temporibus molestias doloribus repellat iusto officia nihil, expedita illum cum distinctio adipisci amet sit.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut adipisci fugit enim dolore! Non quasi dolorem enim culpa
+  similique veritatis repellat quo eaque ratione corrupti, cumque dolor dolores saepe ducimus?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis optio eligendi perspiciatis est quod! Ullam
+  explicabo ipsum quaerat iste quibusdam cum sit quos error, commodi dolor eum voluptas expedita illo.Lorem, ipsum dolor
+  sit amet consectetur adipisicing elit. Ipsum est eos, dicta architecto obcaecati quia, minus
+  temporibus molestias doloribus repellat iusto officia nihil, expedita illum cum distinctio adipisci amet sit.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut adipisci fugit enim dolore! Non quasi dolorem enim culpa
+  similique veritatis repellat quo eaque ratione corrupti, cumque dolor dolores saepe ducimus?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis optio eligendi perspiciatis est quod! Ullam
+  explicabo ipsum quaerat iste quibusdam cum sit quos error, commodi dolor eum voluptas expedita illo. -->
+</body>
+
+</html>

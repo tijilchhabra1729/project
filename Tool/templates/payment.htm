@@ -1,0 +1,14 @@
+{% extends "base.htm" %} {% block content %}
+
+
+
+
+<form action="{{url_for('payment')}}" method="POST">
+  <h1 class="text-5xl font-extrabold text-medium py-2 mb-8 text-gray-500">Check Out by clicking the button</h1>
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button " data-key={{public_key}} data-amount=0499
+    data-name="Check Out" data-description="Upgrade to premium account." data-locale="auto" data-zip-code="true">
+    </script>
+</form>
+
+</div>
+{%endblock%}

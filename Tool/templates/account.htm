@@ -1,0 +1,59 @@
+{%extends "base.htm"%} {%block content%}
+<br /><br /><br /><br /><br /><br />
+
+<div class="container">
+  <div class="row justify-content-center">
+
+    <form method="POST" action="" enctype="multipart/form-data" class="md:w-2/4 w-3/4 rounded-lg overflow-hidden   ">
+      <h1 class="text-5xl font-extrabold text-medium py-2 mb-4 text-gray-500">Welcome, {{current_user.username}}
+      </h1>
+      <img src="{{profile_image}}" class=" w-56 h-56 rounded-full" alt="Card image" />
+      <br>
+      {{form.hidden_tag()}}
+      <div class="pb-3">
+        <label class="block text-gray-500 font-semibold text-left mb-1 md:mb-0 pr-2 tracking-wide"
+          for="inline-full-name">
+          Username
+        </label>
+        {{form.username(class="bg-purple-900 appearance-none outline-none hover:bg-purple-800 transition ease-in-out duration-500 my-2 focus:shadow-outline focus:outline-none text-white p-2 mr-2 rounded")}} {%if
+            form.username.errors%} {%for error in form.username.errors%}
+        <small class="text-danger">{{error}}</small>
+        {%endfor%} {%endif%}
+      </div>
+      <div class="pb-3">
+        <label class="block text-gray-500 font-semibold text-left mb-1 md:mb-0 pr-2 tracking-wide"
+          for="inline-full-name">
+          Email
+        </label>
+        {{form.email (class="bg-purple-900 appearance-none outline-none hover:bg-purple-800 transition ease-in-out duration-500 my-2 w-6/12 focus:shadow-outline focus:outline-none text-white p-2 mr-2 rounded")}}
+        {%if form.email.errors%}
+        {%for error in form.email.errors%}
+        <small class="text-danger">{{error}}</small>
+        {%endfor%} {%endif%}
+      </div>
+      <label class="block text-gray-500 font-semibold text-left mb-1 md:mb-0 pr-2 tracking-wide" for="inline-full-name">
+        Profile Picture
+      </label>
+
+      <div class="img width100 bg-purple-900 appearance-none font-medium rounded w-full py-2 px-4 mb-4
+        text-gray-100 leading-tight focus:outline-none focus:bg-purple-700 transition ease-in-out duration-500 ">
+        <span>Nothing uploaded:</span>
+        <!-- <input type=file name=train class="trainUp" required> -->
+        {{form.picture(class="imgUp")}} {%if
+          form.picture.errors%} {%for error in form.picture.errors%}
+
+        <small class="text-danger">{{error}}</small>
+        {%endfor%} {%endif%}
+      </div>
+      {{form.submit(class = 'bg-purple-700 appearance-none outline-none hover:bg-purple-800 transition ease-in-out duration-500 my-2 focus:shadow-outline focus:outline-none text-white p-3 mr-2 rounded')}}
+      {%if current_user.membership == 'premium'%}
+      {%else%}
+      <a href="{{url_for('sub' , id = 1)}}"
+        class="text-gray-500 hover:text-purple-600 transition ease-in-out duration-500">Upgrade your account to
+        Premium</a>
+      {%endif%}
+  </div>
+  </form>
+</div>
+
+{%endblock%}
