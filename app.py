@@ -5,7 +5,7 @@ from models import db, User
 from flask_session import Session
 from calculate import calculator
 from flask_cors import CORS
-from flask_login import LoginManager, login_user, current_user, login_required
+from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
 app = Flask(__name__)
 app.config.from_object(ApplicationConfig)
@@ -75,6 +75,16 @@ def login():
         "id": user.id,
         "email": user.email
     })
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return jsonify(
+        {
+            "message": "User Logged Out"
+        }
+    )
 #     form = LoginForm()
 #     error = ''
 #     if form.validate_on_submit():
