@@ -19,7 +19,7 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-@app.route('/token', methods=['GET'])
+@app.route('/api/token', methods=['GET'])
 def create_token():
     if current_user.is_authenticated:
         return jsonify({
