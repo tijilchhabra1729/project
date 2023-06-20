@@ -1,0 +1,102 @@
+{
+    "questions": [
+        {
+            "ques_id": "k1",
+            "ques": "No. of polythene bags you get at home",
+            "wt_per_cnt": 3,
+            "plastic_type": 2
+        },
+
+        {
+            "ques_id": "k2",
+            "ques": "No. of bread and milk packets consumed",
+            "wt_per_cnt": 5,
+            "plastic_type": 3
+        },
+
+        {
+            "ques_id": "k3",
+            "ques": "No. of biscuits/chips/maggi packets etc. consumed",
+            "wt_per_cnt": 8,
+            "plastic_type": 5
+        },
+
+        {
+            "ques_id": "k4",
+            "ques": "No. of plastic packets bought in monthly groceries (pulses, rice, wheat, sugar, salt, spices, poha, semolina.)",
+            "wt_per_cnt": 10,
+            "plastic_type": 3
+        },
+
+        {
+            "ques_id": "k5",
+            "ques": "As part of online/takeaway food ordering, no. of plastic containers",
+            "wt_per_cnt": 30,
+            "plastic_type": 3
+        },
+
+        {
+            "ques_id": "k6",
+            "ques": "No. of non reusable plastic bottles used in a week (coke, mineral water, other soft drinks)",
+            "wt_per_cnt": 35,
+            "plastic_type": 1
+        },
+
+        {
+            "ques_id": "k7",
+            "ques": "Styrofoam Cups/Plates as disposable Styrofoam",
+            "wt_per_cnt": 20,
+            "plastic_type": 6
+        },
+
+        {
+            "ques_id": "b1",
+            "ques": "Number of non reusable plastic containers(e.g. shampoo/conditioner/oil/facewash/handwash/creams bottles used",
+            "wt_per_cnt": 70,
+            "plastic_type": 4
+        },
+
+        {
+            "ques_id": "b2",
+            "ques": "No. of toothbrushes",
+            "wt_per_cnt": 20,
+            "plastic_type": 4
+        },
+
+        {
+            "ques_id": "b3",
+            "ques": "No. of toothpastes",
+            "wt_per_cnt": 15,
+            "plastic_type": 4
+        },
+
+        {
+            "ques_id": "b4",
+            "ques": "Garbage bags used per day",
+            "wt_per_cnt": 4,
+            "plastic_type": 3
+        },
+
+        {
+            "ques_id": "o1",
+            "ques": "Bulk Plastic items (toys,plastic containers,buckets,mugs)",
+            "wt_per_cnt": 200,
+            "plastic_type": 4
+        },
+
+        {
+            "ques_id": "o2",
+            "ques": "No. of packets received per month from online ordering on Amazon/Flipkart etc (Amazon deliveries in a plastic cover)",
+            "wt_per_cnt": 20,
+            "plastic_type": 3
+        },
+
+        {
+            "ques_id": "o3",
+            "ques": "Plastic Shopping Bags",
+            "wt_per_cnt": 20,
+            "plastic_type": 3
+        }
+
+    ]
+}

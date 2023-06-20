@@ -1,0 +1,33 @@
+{
+    "emission": [
+        {
+            "type_id": 1,
+            "type_name": "PET",
+            "factor": 6
+        },
+
+        {
+            "type_id": 2,
+            "type_name": "PE",
+            "factor": 6
+        },
+
+        {
+            "type_id": 3,
+            "type_name": "LDPE",
+            "factor": 3
+        },
+
+        {
+            "type_id": 4,
+            "type_name": "HDPE",
+            "factor": 3.11
+        },
+
+        {
+            "type_id": 5,
+            "type_name": "PP",
+            "factor": 1.95
+        }
+    ]
+}
