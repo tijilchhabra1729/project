@@ -24,18 +24,18 @@ def create_token():
     if current_user.is_authenticated:
         return jsonify({
             "email": current_user.email,
-            "id": current_user.id})
+            "id": current_user.id}), 200
 
     else:
         return jsonify({
-            "error": "User not authenticated!"
-        })
+            "error": "Unauthorized"
+        }), 401
 
 
 with app.app_context():
     db.create_all()
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/api/', methods=['GET', 'POST'])
 def index():
     return "Hello world"
 
@@ -44,7 +44,7 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
-@app.route('/calculate', methods=['GET'])
+@app.route('/api/calculate', methods=['GET'])
 def calculate():
 
     mtup = calculator('k1', 5, 'd')
@@ -53,9 +53,9 @@ def calculate():
     return jsonify({
         "weight": a,
         "emission": b
-    })
+    }), 200
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
 
     email = request.json["email"]
@@ -74,9 +74,9 @@ def login():
     return jsonify({
         "id": user.id,
         "email": user.email
-    })
+    }), 200
 
-@app.route("/logout")
+@app.route("/api/logout")
 @login_required
 def logout():
     logout_user()
@@ -84,7 +84,7 @@ def logout():
         {
             "message": "User Logged Out"
         }
-    )
+    ), 200
 #     form = LoginForm()
 #     error = ''
 #     if form.validate_on_submit():
@@ -106,7 +106,7 @@ def logout():
     # return render_template('login.htm')
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/api/register', methods=['POST'])
 def register():
 
     email = request.json["email"]
@@ -134,7 +134,7 @@ def register():
     return jsonify({
         "id": new_user.id,
         "email": new_user.email
-    })
+    }), 200
 
     # form = RegistrationForm()
     # if form.validate_on_submit():
