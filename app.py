@@ -6,6 +6,7 @@ from flask_session import Session
 from calculate import calculator
 from flask_cors import CORS
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
+from datetime import datetime
 
 app = Flask(__name__)
 app.config.from_object(ApplicationConfig)
@@ -18,6 +19,21 @@ bcrypt = Bcrypt(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+def get_time_now():
+    current_time = datetime.now()
+    return current_time
+
+def get_year():
+    current_time = get_time_now()
+    current_year = current_time.year
+    return current_year
+
+def get_week():
+    current_time = get_time_now()
+    current_week = current_time.isocalendar().week
+    return current_week
+
 
 @app.route('/api/token', methods=['GET'])
 def create_token():

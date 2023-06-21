@@ -3,7 +3,6 @@ from flask_login import UserMixin
 from uuid import uuid4
 from datetime import datetime
 
-
 db = SQLAlchemy()
 
 def get_uuid():
@@ -19,11 +18,11 @@ class User(db.Model, UserMixin):
 
 class Emission(db.Model):
     __tablename__ = "emissions"
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    datetime = db.Column(db.DateTime, default=datetime.utcnow)
-    week_number = db.Column(db.Integer, default=datetime.utcnow.iscalendar()[1])
-    year = db.Column(db.Integer, default=datetime.utcnow.year)
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    datetime = db.Column(db.DateTime)
+    week_number = db.Column(db.Integer)
+    year = db.Column(db.Integer)
     plastic_emission = db.Column(db.Float, default = 0.0)
     carbon_emission = db.Column(db.Float, default = 0.0)
     category = db.Column(db.String(32), nullable=False)
-
