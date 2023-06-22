@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import redis
+from datetime import timedelta
 
 
 load_dotenv()
@@ -23,3 +24,5 @@ class ApplicationConfig:
     JWT_SECRET_KEY = 'mysecret'
 
     JWT_TOKEN_LOCATION = ['headers', 'query_string']
+
+    ACCESS_EXPIRES = timedelta(hours=12)

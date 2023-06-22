@@ -16,7 +16,7 @@ def calculator(qid, data, time):
 
     for i in t['emission']:
         if i['type_id'] == plastic_type:
-            emission_factor = i['factor']
+            factor = i['factor']
 
     if time == 'w':
         total_per_time *= 52
@@ -29,11 +29,12 @@ def calculator(qid, data, time):
 
     total_weight = (total_per_time * wt_per_cnt) / 1000
 
-    emission = total_weight * emission_factor
+    emission = total_weight * factor
 
     f.close()
     g.close()
 
     return (total_weight, emission)
+
     
 

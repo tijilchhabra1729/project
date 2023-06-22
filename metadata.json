@@ -28,6 +28,18 @@
             "type_id": 5,
             "type_name": "PP",
             "factor": 1.95
+        },
+
+        {
+            "type_id": 6,
+            "type_name": "PS",
+            "factor": 6.9
+        },
+
+        {
+            "type_id": 7,
+            "type_name": "PVC",
+            "factor": 5.42
         }
     ]
 }

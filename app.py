@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify, session
 from flask_bcrypt import Bcrypt
 from config import ApplicationConfig
-from models import db, User, TokenBlocklist
+from models import db, User, TokenBlocklist, Emission
 from flask_session import Session
 from calculate import calculator
 from flask_cors import CORS
 from datetime import datetime, timezone
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager, current_user, get_jwt
+import json
 
 app = Flask(__name__)
 app.config.from_object(ApplicationConfig)
@@ -57,18 +58,108 @@ def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
 
     return token is not None
 
-# @app.route('/api/calculate', methods=['GET'])
-# @jwt_required(optional=True)
-# def calculate():
-#     current_identity = get_jwt_identity()
+@app.route('/api/calculate', methods=['GET'])
+@jwt_required(optional=True)
+def calculate():
+    current_identity = get_jwt_identity()
+    kitchen_plastic_total = 0
+    kitchen_carbon_total = 0
+    bathroom_plastic_total = 0
+    bathroom_carbon_total = 0
+    others_plastic_total = 0
+    others_carbon_total = 0
+
+
+    f = open("test.json")
+    g = json.load(f)
+
+    if current_identity:
+        for i in range(7):
+            a,b = calculator(g['Kitchen'][i]['ques_id'], g['Kitchen'][i]['value'], g['Kitchen'][i]['freq'])
+            kitchen_carbon_total += b
+            kitchen_plastic_total += a 
+        for i in range(4):
+            a,b = calculator(g['Bathroom'][i]['ques_id'], g['Bathroom'][i]['value'], g['Bathroom'][i]['freq'])
+            bathroom_carbon_total += b
+            bathroom_plastic_total += a
+        for i in range(3):
+            a,b = calculator(g['Others'][i]['ques_id'], g['Others'][i]['value'], g['Others'][i]['freq'])
+            others_carbon_total += b
+            others_plastic_total += a
+
+        total_plastic_emission = kitchen_plastic_total + bathroom_plastic_total + others_plastic_total
+        total_carbon_emission = kitchen_carbon_total + bathroom_carbon_total + others_carbon_total
+
+        user = User.query.filter_by(id=current_identity).first()
+        emission_old = Emission.query.filter_by(user_id=user.id).all()
+
+        week = get_week()
+        year = get_year()
+
+        emission = Emission(user_id=user.id,
+                            
+                            week_number=week,
+                            year=year,
+                            kitchen_plastic_emission=kitchen_plastic_total,
+                            kitchen_carbon_emission=kitchen_carbon_total,
+                            bathroom_carbon_emission=bathroom_carbon_total,
+                            bathroom_plastic_emission=bathroom_plastic_total,
+                            others_carbon_emission=others_carbon_total,
+                            others_plastic_emission=others_carbon_total)
+        if emission_old != None: 
+            latest_emission = emission_old[-1]
+            if latest_emission.week_number == week:
+                db.session.delete(latest_emission)
+                db.session.add(emission)
+
+        else:
+            db.session.add(emission)
+
+        db.session.commit()
+
+        return jsonify({
+            "Kitchen_Plastic_Emission": kitchen_plastic_total,
+            "Kitchen_Carbon_Emission": kitchen_carbon_total,
+            "Bathroom_Plastic_Emision": bathroom_plastic_total,
+            "Bathroom_Carbon_Emission": bathroom_carbon_total,
+            "Others_Plastic_Emission": others_plastic_total,
+            "Others_Carbon_Emission": others_carbon_total,
+            "Total_Carbon_Emission": total_carbon_emission,
+            "Total_Plastic_Emission": total_plastic_emission
+        }), 200
     
-#     if current_identity:
+    else:
+
+        for i in range(7):
+            a,b = calculator(g['Kitchen'][i]['ques_id'], g['Kitchen'][i]['value'], g['Kitchen'][i]['freq'])
+            kitchen_carbon_total += b
+            kitchen_plastic_total += a 
+        for i in range(4):
+            a,b = calculator(g['Bathroom'][i]['ques_id'], g['Bathroom'][i]['value'], g['Bathroom'][i]['freq'])
+            bathroom_carbon_total += b
+            bathroom_plastic_total += a
+        for i in range(3):
+            a,b = calculator(g['Others'][i]['ques_id'], g['Others'][i]['value'], g['Others'][i]['freq'])
+            others_carbon_total += b
+            others_plastic_total += a
+
+        total_plastic_emission = kitchen_plastic_total + bathroom_plastic_total + others_plastic_total
+        total_carbon_emission = kitchen_carbon_total + bathroom_carbon_total + others_carbon_total
+
+        return jsonify({
+            "Kitchen_Plastic_Emission": kitchen_plastic_total,
+            "Kitchen_Carbon_Emission": kitchen_carbon_total,
+            "Bathroom_Plastic_Emision": bathroom_plastic_total,
+            "Bathroom_Carbon_Emission": bathroom_carbon_total,
+            "Others_Plastic_Emission": others_plastic_total,
+            "Others_Carbon_Emission": others_carbon_total,
+            "Total_Carbon_Emission": total_carbon_emission,
+            "Total_Plastic_Emission": total_plastic_emission
+        }), 200
+
+    f.close()
 
 
-#         return jsonify({
-#             "weight": 1,
-#             "emission": 2 
-#         }), 200
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -77,7 +168,6 @@ def login():
     password = request.json["password"]
 
     user = User.query.filter_by(email=email).first()
-    print(user)
 
     if user is None:
         return jsonify({"error": "Unauthorized"}), 401
@@ -86,7 +176,6 @@ def login():
         return jsonify({"error": "Unauthorized"}), 401
     
     access_token = create_access_token(identity=user)
-    print(user)
     
     return jsonify(access_token=access_token, name=user.name, email=user.email), 200
 

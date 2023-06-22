@@ -21,12 +21,15 @@ class Emission(db.Model):
     __tablename__ = "emissions"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    datetime = db.Column(db.DateTime)
+    # datetime = db.Column(db.DateTime)
     week_number = db.Column(db.Integer)
     year = db.Column(db.Integer)
-    plastic_emission = db.Column(db.Float, default = 0.0)
-    carbon_emission = db.Column(db.Float, default = 0.0)
-    category = db.Column(db.String(32), nullable=False)
+    kitchen_plastic_emission = db.Column(db.Float, default = 0.0)
+    kitchen_carbon_emission = db.Column(db.Float, default = 0.0)
+    bathroom_plastic_emission = db.Column(db.Float, default = 0.0)
+    bathroom_carbon_emission = db.Column(db.Float, default = 0.0)
+    others_plastic_emission = db.Column(db.Float, default = 0.0)
+    others_carbon_emission = db.Column(db.Float, default = 0.0)
 
 
 class TokenBlocklist(db.Model):
