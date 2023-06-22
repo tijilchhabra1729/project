@@ -24,6 +24,8 @@ def calculator(qid, data, time):
         total_per_time *= 12
     elif time == 'd':
         total_per_time *= 365
+    elif time == 'q':
+        total_per_time *= 4
 
     total_weight = (total_per_time * wt_per_cnt) / 1000
 

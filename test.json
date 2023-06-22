@@ -2,46 +2,95 @@
     "Kitchen": [
         {
             "ques_id": "k1",
-            "value": 0,
-            "freq": "" 
+            "value": 5,
+            "freq": "d" 
         },
 
         {
             "ques_id": "k2",
-            "value": 0,
-            "freq": ""
+            "value": 10,
+            "freq": "w"
+        },
+
+        {
+            "ques_id": "k3",
+            "value": 3,
+            "freq": "w"
+        },
+
+        {
+            "ques_id": "k4",
+            "value": 25,
+            "freq": "m"
+        },
+
+        {
+            "ques_id": "k5",
+            "value": 3,
+            "freq": "w"
+        },
+
+        {
+            "ques_id": "k6",
+            "value": 2,
+            "freq": "w"
+        },
+
+        {
+            "ques_id": "k7",
+            "value": 5,
+            "freq": "m"
         }
+
     ],
 
     "Bathroom": [
         {
             "ques_id": "b1",
-            "value": 0,
-            "freq": ""
+            "value": 3,
+            "freq": "q"
         },
 
         {
             "ques_id": "b2",
-            "value": 0,
-            "freq": ""
+            "value": 1,
+            "freq": "q"
+        },
+
+        {
+            "ques_id": "b3",
+            "value": 2,
+            "freq": "q"
+        },
+
+        {
+            "ques_id": "b4",
+            "value": 2,
+            "freq": "d"
         }
     ],
 
     "Others": [
         {
             "ques_id": "o1",
-            "value": 0,
-            "freq": ""
+            "value": 3,
+            "freq": "y"
         },
 
         {
             "ques_id": "o2",
-            "value": 0,
-            "freq": ""
+            "value": 1,
+            "freq": "m"
+        },
+
+        {
+            "ques_id": "o3",
+            "value": 3,
+            "freq": "q"
         }
     ],
 
     "Family": {
-        "members": 0
+        "members": 4
     }
 }   

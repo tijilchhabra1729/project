@@ -3,6 +3,7 @@ from flask_login import UserMixin
 from uuid import uuid4
 from datetime import datetime
 
+
 db = SQLAlchemy()
 
 def get_uuid():
@@ -26,3 +27,10 @@ class Emission(db.Model):
     plastic_emission = db.Column(db.Float, default = 0.0)
     carbon_emission = db.Column(db.Float, default = 0.0)
     category = db.Column(db.String(32), nullable=False)
+
+
+class TokenBlocklist(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    jti = db.Column(db.String(36), nullable=False, index=True)
+    created_at = db.Column(db.DateTime, nullable=False)
+

@@ -6,3 +6,5 @@ flask-session
 redis
 flask_cors
 flask_login
+datetime
+flask-jwt-extended

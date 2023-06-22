@@ -20,4 +20,6 @@ class ApplicationConfig:
 
     SESSION_COOKIE_SAMESITE = "Strict"
 
-    JWT_SECRET_KEY = 'mysecret  '
+    JWT_SECRET_KEY = 'mysecret'
+
+    JWT_TOKEN_LOCATION = ['headers', 'query_string']
