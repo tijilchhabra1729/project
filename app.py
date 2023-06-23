@@ -70,20 +70,17 @@ def calculate():
     others_carbon_total = 0
 
 
-    f = open("test.json")
-    g = json.load(f)
-
     if current_identity:
         for i in range(7):
-            a,b = calculator(g['Kitchen'][i]['ques_id'], g['Kitchen'][i]['value'], g['Kitchen'][i]['freq'])
+            a,b = calculator(request.json['Kitchen'][i]['ques_id'], request.json['Kitchen'][i]['value'], request.json['Kitchen'][i]['freq'])
             kitchen_carbon_total += b
             kitchen_plastic_total += a 
         for i in range(4):
-            a,b = calculator(g['Bathroom'][i]['ques_id'], g['Bathroom'][i]['value'], g['Bathroom'][i]['freq'])
+            a,b = calculator(request.json['Bathroom'][i]['ques_id'], request.json['Bathroom'][i]['value'], request.json['Bathroom'][i]['freq'])
             bathroom_carbon_total += b
             bathroom_plastic_total += a
         for i in range(3):
-            a,b = calculator(g['Others'][i]['ques_id'], g['Others'][i]['value'], g['Others'][i]['freq'])
+            a,b = calculator(request.json['Others'][i]['ques_id'], request.json['Others'][i]['value'], request.json['Others'][i]['freq'])
             others_carbon_total += b
             others_plastic_total += a
 
@@ -131,15 +128,15 @@ def calculate():
     else:
 
         for i in range(7):
-            a,b = calculator(g['Kitchen'][i]['ques_id'], g['Kitchen'][i]['value'], g['Kitchen'][i]['freq'])
+            a,b = calculator(request.json['Kitchen'][i]['ques_id'], request.json['Kitchen'][i]['value'], request.json['Kitchen'][i]['freq'])
             kitchen_carbon_total += b
             kitchen_plastic_total += a 
         for i in range(4):
-            a,b = calculator(g['Bathroom'][i]['ques_id'], g['Bathroom'][i]['value'], g['Bathroom'][i]['freq'])
+            a,b = calculator(request.json['Bathroom'][i]['ques_id'], request.json['Bathroom'][i]['value'], request.json['Bathroom'][i]['freq'])
             bathroom_carbon_total += b
             bathroom_plastic_total += a
         for i in range(3):
-            a,b = calculator(g['Others'][i]['ques_id'], g['Others'][i]['value'], g['Others'][i]['freq'])
+            a,b = calculator(request.json['Others'][i]['ques_id'], request.json['Others'][i]['value'], request.json['Others'][i]['freq'])
             others_carbon_total += b
             others_plastic_total += a
 
@@ -157,7 +154,7 @@ def calculate():
             "Total_Plastic_Emission": total_plastic_emission
         }), 200
 
-    f.close()
+    
 
 
 
