@@ -58,7 +58,8 @@ def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
 
     return token is not None
 
-@app.route('/api/calculate', methods=['GET'])
+
+@app.route('/api/calculate', methods=['POST'])
 @jwt_required(optional=True)
 def calculate():
     current_identity = get_jwt_identity()
@@ -103,7 +104,7 @@ def calculate():
                             bathroom_plastic_emission=bathroom_plastic_total,
                             others_carbon_emission=others_carbon_total,
                             others_plastic_emission=others_carbon_total)
-        if emission_old != None: 
+        if emission_old:
             latest_emission = emission_old[-1]
             if latest_emission.week_number == week:
                 db.session.delete(latest_emission)
