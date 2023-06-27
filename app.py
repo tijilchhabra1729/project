@@ -85,8 +85,8 @@ def calculate():
             others_carbon_total += b
             others_plastic_total += a
 
-        total_plastic_emission = kitchen_plastic_total + bathroom_plastic_total + others_plastic_total
-        total_carbon_emission = kitchen_carbon_total + bathroom_carbon_total + others_carbon_total
+        total_plastic_emission = round(kitchen_plastic_total + bathroom_plastic_total + others_plastic_total, 2)
+        total_carbon_emission = round(kitchen_carbon_total + bathroom_carbon_total + others_carbon_total, 2)
 
         user = User.query.filter_by(id=current_identity).first()
         emission_old = Emission.query.filter_by(user_id=user.id).all()
@@ -116,12 +116,12 @@ def calculate():
         db.session.commit()
 
         return jsonify({
-            "Kitchen_Plastic_Emission": kitchen_plastic_total,
-            "Kitchen_Carbon_Emission": kitchen_carbon_total,
-            "Bathroom_Plastic_Emission": bathroom_plastic_total,
-            "Bathroom_Carbon_Emission": bathroom_carbon_total,
-            "Others_Plastic_Emission": others_plastic_total,
-            "Others_Carbon_Emission": others_carbon_total,
+            "Kitchen_Plastic_Emission": round(kitchen_plastic_total,2),
+            "Kitchen_Carbon_Emission": round(kitchen_carbon_total,2),
+            "Bathroom_Plastic_Emission": round(bathroom_plastic_total,2),
+            "Bathroom_Carbon_Emission": round(bathroom_carbon_total,2),
+            "Others_Plastic_Emission": round(others_plastic_total,2),
+            "Others_Carbon_Emission": round(others_carbon_total,2),
             "Total_Carbon_Emission": total_carbon_emission,
             "Total_Plastic_Emission": total_plastic_emission
         }), 200
@@ -141,16 +141,16 @@ def calculate():
             others_carbon_total += b
             others_plastic_total += a
 
-        total_plastic_emission = kitchen_plastic_total + bathroom_plastic_total + others_plastic_total
-        total_carbon_emission = kitchen_carbon_total + bathroom_carbon_total + others_carbon_total
+        total_plastic_emission = round(kitchen_plastic_total + bathroom_plastic_total + others_plastic_total, 2)
+        total_carbon_emission = round(kitchen_carbon_total + bathroom_carbon_total + others_carbon_total, 2)
 
         return jsonify({
-            "Kitchen_Plastic_Emission": kitchen_plastic_total,
-            "Kitchen_Carbon_Emission": kitchen_carbon_total,
-            "Bathroom_Plastic_Emission": bathroom_plastic_total,
-            "Bathroom_Carbon_Emission": bathroom_carbon_total,
-            "Others_Plastic_Emission": others_plastic_total,
-            "Others_Carbon_Emission": others_carbon_total,
+            "Kitchen_Plastic_Emission": round(kitchen_plastic_total,2),
+            "Kitchen_Carbon_Emission": round(kitchen_carbon_total,2),
+            "Bathroom_Plastic_Emission": round(bathroom_plastic_total,2),
+            "Bathroom_Carbon_Emission": round(bathroom_carbon_total,2),
+            "Others_Plastic_Emission": round(others_plastic_total,2),
+            "Others_Carbon_Emission": round(others_carbon_total,2),
             "Total_Carbon_Emission": total_carbon_emission,
             "Total_Plastic_Emission": total_plastic_emission
         }), 200
