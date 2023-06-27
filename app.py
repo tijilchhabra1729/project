@@ -147,7 +147,7 @@ def calculate():
         return jsonify({
             "Kitchen_Plastic_Emission": kitchen_plastic_total,
             "Kitchen_Carbon_Emission": kitchen_carbon_total,
-            "Bathroom_Plastic_Emision": bathroom_plastic_total,
+            "Bathroom_Plastic_Emission": bathroom_plastic_total,
             "Bathroom_Carbon_Emission": bathroom_carbon_total,
             "Others_Plastic_Emission": others_plastic_total,
             "Others_Carbon_Emission": others_carbon_total,
