@@ -227,6 +227,61 @@ def register():
         "access_token": access_token
     }), 200
 
+@app.route('/api/dashboard', methods=['GET', 'POST'])
+@jwt_required
+def dashboard():
+    current_identity = get_jwt_identity()
+    user = User.query.filter_by(id=current_identity).first()
+    emission = Emission.query.filter_by(user_id=user.id).all()
+
+    my_list = []
+    my_list2 = []
+
+    for i in range(len(emission)):
+        temp_dict = {'week': 0, 'kitchen': 0, 'bathroom': 0, 'others': 0}
+        week = i.week
+        kitchen_plastic = i.kitchen_plastic_emission
+        bathroom_plastic = i.bathroom_plastic_emission
+        others_plastic = i.others_plastic_emission
+
+        temp_dict['week'] = week
+        temp_dict['kitchen'] = kitchen_plastic
+        temp_dict['bathroom'] = bathroom_plastic
+        temp_dict['others'] = others_plastic
+
+        my_list.append(temp_dict)
+
+    
+    for i in range(len(emission)):
+        temp_dict = {'week': 0, 'kitchen': 0, 'bathroom': 0, 'others': 0}
+        week = i.week
+        kitchen_carbon = i.kitchen_carbon_emission
+        bathroom_carbon = i.bathroom_carbon_emission
+        others_carbon = i.others_carbon_emission
+
+        temp_dict['week'] = week
+        temp_dict['kitchen'] = kitchen_carbon
+        temp_dict['bathroom'] = bathroom_carbon
+        temp_dict['others'] = others_carbon
+
+        my_list.append(temp_dict)
+
+    return jsonify({
+        "plastic": my_list,
+        "carbon": my_list2
+    })
+        
+# @app.route('/api/test')
+# @jwt_required
+# def addrecords():
+#     for i in range(2):
+#         year = get_year()
+#         emission = Emission(week_number=i,
+#                             year=year,
+#                             kitchen_plastic_emission=10)
+#         db.session.add(emission)
+#         db.session.commit()
+#     return "Hello world, added entries"
 
 if __name__ == '__main__':
     app.run()

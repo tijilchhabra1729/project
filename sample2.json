@@ -1,0 +1,31 @@
+{
+  "plastic": [
+    {
+      "week": 21,
+      "kitchen": 33.1,
+      "bathroom": 50.2,
+      "others": 17
+    },
+    {
+      "week": 22,
+      "kitchen": 3.1,
+      "bathroom": 50.2,
+      "others": 67
+    }
+  ],
+
+  "carbon" : [
+    {
+      "week": 21,
+      "kitchen": 6.1,
+      "bathroom": 20.2,
+      "others": 67
+    },
+    {
+      "week": 22,
+      "kitchen": 13.1,
+      "bathroom": 10.2,
+      "others": 57
+    }
+  ]
+}
