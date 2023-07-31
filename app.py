@@ -108,11 +108,11 @@ def calculate():
             latest_emission = emission_old[-1]
             if latest_emission.week_number == week:
                 db.session.delete(latest_emission)
-                db.session.add(emission)
+                # db.session.add(emission)
 
-        else:
-            db.session.add(emission)
-
+        # else:
+        #     db.session.add(emission)
+        db.session.add(emission)
         db.session.commit()
 
         return jsonify({
