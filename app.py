@@ -228,7 +228,7 @@ def register():
     }), 200
 
 @app.route('/api/dashboard', methods=['GET', 'POST'])
-@jwt_required
+@jwt_required()
 def dashboard():
     current_identity = get_jwt_identity()
     user = User.query.filter_by(id=current_identity).first()
@@ -239,10 +239,10 @@ def dashboard():
 
     for i in range(len(emission)):
         temp_dict = {'week': 0, 'kitchen': 0, 'bathroom': 0, 'others': 0}
-        week = i.week
-        kitchen_plastic = i.kitchen_plastic_emission
-        bathroom_plastic = i.bathroom_plastic_emission
-        others_plastic = i.others_plastic_emission
+        week = emission[i].week_number
+        kitchen_plastic = emission[i].kitchen_plastic_emission
+        bathroom_plastic = emission[i].bathroom_plastic_emission
+        others_plastic = emission[i].others_plastic_emission
 
         temp_dict['week'] = week
         temp_dict['kitchen'] = kitchen_plastic
@@ -254,17 +254,17 @@ def dashboard():
     
     for i in range(len(emission)):
         temp_dict = {'week': 0, 'kitchen': 0, 'bathroom': 0, 'others': 0}
-        week = i.week
-        kitchen_carbon = i.kitchen_carbon_emission
-        bathroom_carbon = i.bathroom_carbon_emission
-        others_carbon = i.others_carbon_emission
+        week = emission[i].week_number
+        kitchen_carbon = emission[i].kitchen_carbon_emission
+        bathroom_carbon = emission[i].bathroom_carbon_emission
+        others_carbon = emission[i].others_carbon_emission
 
         temp_dict['week'] = week
         temp_dict['kitchen'] = kitchen_carbon
         temp_dict['bathroom'] = bathroom_carbon
         temp_dict['others'] = others_carbon
 
-        my_list.append(temp_dict)
+        my_list2.append(temp_dict)
 
     return jsonify({
         "plastic": my_list,
