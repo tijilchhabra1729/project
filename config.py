@@ -19,8 +19,8 @@ class ApplicationConfig:
 
     SESSION_COOKIE_SAMESITE = "Strict"
 
-    JWT_SECRET_KEY = 'mysecret'
+    JWT_SECRET_KEY = 'cdd869ed49591a0377cf7605f9b8005a'
 
     JWT_TOKEN_LOCATION = ['headers', 'query_string']
 
-    ACCESS_EXPIRES = timedelta(hours=12)
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=12)
