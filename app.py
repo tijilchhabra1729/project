@@ -270,7 +270,12 @@ def dashboard():
         "plastic": my_list,
         "carbon": my_list2
     })
-        
+
+
+@app.route('/api/visitor', methods=['GET'])
+def visitor():
+    return {"visitor": 4}, 200
+
 # @app.route('/api/test')
 # @jwt_required
 # def addrecords():
