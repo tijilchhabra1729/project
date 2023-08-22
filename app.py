@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager, current_user, get_jwt
 import json
 from flask_view_counter import ViewCounter
-from sqlalchemy.sql import select
+import sqlite3
 
 app = Flask(__name__)
 app.config.from_object(ApplicationConfig)
@@ -43,6 +43,9 @@ def get_week():
 with app.app_context():
     db.create_all()
     views = ViewCounter(app, db)
+
+con = sqlite3.connect("instance/db.sqlite")
+cur = con.cursor()
 
 
 @app.route('/api/', methods=['GET', 'POST'])
@@ -293,11 +296,7 @@ def dashboard():
 
 @app.route('/api/visitor', methods=['GET'])
 def visitor():
-    my_views = db.engine.execute(select([views.requests]))
-    count = 0
-    for view in my_views:
-        count += 1
-
+    count = cur.execute("select count(id) from vc_requests").fetchall()[0][0]
     return {"visitor": count}, 200
 
 # @app.route('/api/test')
