@@ -74,7 +74,6 @@ def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
 
 @app.route('/api/calculate', methods=['POST'])
 @jwt_required(optional=True)
-@views.count
 def calculate():
     current_identity = get_jwt_identity()
     kitchen_plastic_total = 0
@@ -295,6 +294,7 @@ def dashboard():
 
 
 @app.route('/api/visitor', methods=['GET'])
+@views.count
 def visitor():
     count = cur.execute("select count(id) from vc_requests").fetchall()[0][0]
     return {"visitor": count}, 200
