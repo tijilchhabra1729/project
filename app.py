@@ -267,9 +267,9 @@ def dashboard():
         others_plastic = emission[i].others_plastic_emission
 
         temp_dict['week'] = week
-        temp_dict['kitchen'] = kitchen_plastic
-        temp_dict['bathroom'] = bathroom_plastic
-        temp_dict['others'] = others_plastic
+        temp_dict['kitchen'] = round(kitchen_plastic, 2)
+        temp_dict['bathroom'] = round(bathroom_plastic, 2)
+        temp_dict['others'] = round(others_plastic, 2)
 
         my_list.append(temp_dict)
 
@@ -281,9 +281,9 @@ def dashboard():
         others_carbon = emission[i].others_carbon_emission
 
         temp_dict['week'] = week
-        temp_dict['kitchen'] = kitchen_carbon
-        temp_dict['bathroom'] = bathroom_carbon
-        temp_dict['others'] = others_carbon
+        temp_dict['kitchen'] = round(kitchen_carbon, 2)
+        temp_dict['bathroom'] = round(bathroom_carbon, 2)
+        temp_dict['others'] = round(others_carbon, 2)
 
         my_list2.append(temp_dict)
 
